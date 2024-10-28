@@ -1,0 +1,72 @@
+[
+	{
+		"_id": "670d32269be4590677c21d21",
+		"catwayNumber": "1",
+		"type": "long",
+		"catwayState": "disponible",
+		"__v": 0
+	},
+	{
+		"_id": "670fbe938ccabe4b6d04bb6c",
+		"catwayNumber": "2",
+		"type": "short",
+		"catwayState": "disponible",
+		"__v": 0
+	},
+	{
+		"_id": "670fdb3927d5bf326cb849e3",
+		"catwayNumber": "3",
+		"type": "short",
+		"catwayState": "réservé",
+		"__v": 0
+	},
+	{
+		"_id": "6710fdc5cd7a0d1a5887cbb9",
+		"catwayNumber": "4",
+		"type": "long",
+		"catwayState": "réservé",
+		"__v": 0
+	},
+	{
+		"_id": "671105c7b3603c8d13d48ee6",
+		"catwayNumber": "5",
+		"type": "long",
+		"catwayState": "réservé",
+		"__v": 0
+	},
+	{
+		"_id": "67110b965ed5e08a457a7171",
+		"catwayNumber": "6",
+		"type": "short",
+		"catwayState": "disponible",
+		"__v": 0
+	},
+	{
+		"_id": "671279d6ce1feb820b6c193b",
+		"catwayNumber": "7",
+		"type": "long",
+		"catwayState": "disponible",
+		"__v": 0
+	},
+	{
+		"_id": "6716696193540d4c747cf2a8",
+		"catwayNumber": "8",
+		"type": "short",
+		"catwayState": "disponible",
+		"__v": 0
+	},
+	{
+		"_id": "6716697893540d4c747cf2ab",
+		"catwayNumber": "9",
+		"type": "long",
+		"catwayState": "réservé",
+		"__v": 0
+	},
+	{
+		"_id": "6716697e93540d4c747cf2ad",
+		"catwayNumber": "10",
+		"type": "short",
+		"catwayState": "réservé",
+		"__v": 0
+	}
+]

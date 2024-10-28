@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="body">
+        <header>
+            <h1>Tableau de Bord</h1>
+            <nav>
+                <a href="/catways.html">Liste des Catways</a>
+                 | 
+                <a href="/reservations.html">Liste des Réservations</a>
+            </nav>
+        </header>
+        
+        <main>
+            <div class="main-dashboard">
+                <div class="users">
+                    <!-- Utilisateurs -->
+                    <h2>Gestion des Utilisateurs</h2>
+                    <form id="createUserForm">
+                        <h3>Créer un Utilisateur</h3>
+                        <input type="text" name="name" placeholder="Nom" required>
+                        <input type="email" name="email" placeholder="Email" required>
+                        <input type="password" name="password" placeholder="Mot de passe" required>
+                        <button type="submit">Créer un Utilisateur</button>
+                    </form>
+            
+                    <form id="deleteUserForm">
+                        <h3>Supprimer un Utilisateur</h3>
+                        <input type="text" name="userId" placeholder="ID de l'utilisateur" required>
+                        <button type="submit">Supprimer un Utilisateur</button>
+                    </form>
+                </div>
+
+                <hr>
+    
+                <div class="catways">
+                    <!-- Catways -->
+                <h2>Gestion des Catways</h2>
+                <form id="createCatwayForm">
+                    <h3>Créer un Catway</h3>
+                    <input type="text" name="catwayNumber" placeholder="Numéro de Catway" required>
+                    <input type="text" name="type" placeholder="Type" required>
+                    <input type="text" name="catwayState" placeholder="État du Catway" required>
+                    <button type="submit">Créer un Catway</button>
+                </form>
+        
+                <form id="updateCatwayForm">
+                    <h3>Modifier un Catway</h3>
+                    <input type="text" name="catwayId" placeholder="ID du Catway" required>
+                    <input type="text" name="catwayNumber" placeholder="Numéro de Catway" required>
+                    <input type="text" name="type" placeholder="Type" required>
+                    <input type="text" name="catwayState" placeholder="État du Catway" required>
+                    <button type="submit">Modifier un Catway</button>
+                </form>
+        
+                <form id="deleteCatwayForm">
+                    <h3>Supprimer un Catway</h3>
+                    <input type="text" name="catwayId" placeholder="ID du Catway" required>
+                    <button type="submit">Supprimer un Catway</button>
+                </form>
+        
+                <form id="showCatwayForm">
+                    <h3>Afficher les Détails d'un Catway</h3>
+                    <input type="text" name="catwayId" placeholder="ID du Catway" required>
+                    <button type="submit">Afficher les détails d'un Catway</button>
+                </form>
+                </div>
+
+                <hr>
+    
+                <div class="reservations">
+                    <!-- Réservations -->
+                <h2>Gestion des Réservations</h2>
+                <form id="createReservationForm">
+                    <h3>Créer une Réservation</h3>
+                    <input type="text" name="catwayId" placeholder="ID du Catway" required>
+                    <input type="text" name="clientName" placeholder="Nom du Client" required>
+                    <input type="text" name="boatName" placeholder="Nom du Bateau" required>
+                    <input type="date" name="checkIn" placeholder="Date de Début" required>
+                    <input type="date" name="checkOut" placeholder="Date de Fin" required>
+                    <button type="submit">Créer une Réservation</button>
+                </form>
+        
+                <form id="deleteReservationForm">
+                    <h3>Supprimer une Réservation</h3>
+                    <input type="text" name="catwayId" placeholder="ID du Catway" required>
+                    <input type="text" name="reservationId" placeholder="ID de la Réservation" required>
+                    <button type="submit">Supprimer une Réservation</button>
+                </form>
+        
+                <form id="showReservationForm">
+                    <h3>Afficher les Détails d'une Réservation</h3>
+                    <input type="text" name="catwayId" placeholder="ID du Catway" required>
+                    <input type="text" name="reservationId" placeholder="ID de la Réservation" required>
+                    <button type="submit">Afficher les détails d'une Réservation</button>
+                </form>
+                </div>
+            </div>
+        </main>
+    
+        <footer>
+            <p>&copy; 2024 Port de Plaisance Russell</p>
+        </footer>
+    </div>
+
+    <script>
+        const token = localStorage.getItem('token');
+        console.log('Token :', token);
+
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        };
+
+        if (!token) {
+            alert('Token non trouvé, veuillez vous connecter');
+            window.location.href = '/index.html';
+        }
+
+
+        // Créer un utilisateur
+        async function createUser(event) {
+            event.preventDefault();
+
+            const name = event.target.name.value;
+            const email = event.target.email.value;
+            const password = event.target.password.value;
+
+            try {
+                const response = await fetch('/api/auth/signup', {
+                    method: 'POST',
+                    headers,
+                    body: JSON.stringify({ name, email, password })
+                });
+
+                if (!response.ok) throw new Error('Erreur lors de la création de l\'utilisateur');
+
+                alert('L\'utilisateur a été créé avec succès');
+
+                event.target.reset();
+            } catch (error) {
+                console.error('Erreur :', error);
+                alert('Échec lors de la création de l\'utilisateur : ' + error.message);
+            }
+        }
+        
+        // Supprimer un utilisateur
+        async function deleteUser(event) {
+            event.preventDefault();
+
+            const userId = event.target.userId.value;
+
+            try {
+                const response = await fetch(`/api/auth/delete/${userId}`, {
+                    method: 'DELETE',
+                    headers
+                });
+
+                if (!response.ok) throw new Error('Erreur lors de la suppression de l\'utilisateur');
+
+                alert('L\'utilisateur a été supprimé avec succès');
+
+                event.target.reset();
+            } catch (error) {
+                console.error('Erreur :', error);
+                alert('Échec lors de la suppression de l\'utilisateur : ' + error.message);
+            }
+        }
+
+
+        // Créer un catway
+        async function createCatway(event) {
+            event.preventDefault();
+
+            const catwayNumber = event.target.catwayNumber.value;
+            const type = event.target.type.value;
+            const catwayState = event.target.catwayState.value;
+
+            try {
+                const response = await fetch('/api/catways', {
+                    method: 'POST',
+                    headers,
+                    body: JSON.stringify({ catwayNumber, type, catwayState })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(`Erreur lors de la création du catway : ${errorData.message}`);
+                }
+
+                alert('Le catway a été créé avec succès');
+
+                event.target.reset();
+            } catch (error) {
+                console.error('Erreur :', error);
+                alert('Échec lors de la création du catway : ' + error.message);
+            }
+        }
+
+
+        // Modifier un catway
+        async function updateCatway(event) {
+            event.preventDefault();
+
+            const catwayId = event.target.catwayId.value;
+            const catwayNumber = event.target.catwayNumber.value;
+            const type = event.target.type.value;
+            const catwayState = event.target.catwayState.value;
+
+            try {
+                const response = await fetch(`/api/catways/${catwayId}`, {
+                    method: 'PUT',
+                    headers,
+                    body: JSON.stringify({ catwayNumber, type, catwayState })
+                });
+
+                if (!response.ok) throw new Error('Erreur lors de la modification du catway');
+
+                alert('Le catway a été modifié avec succès');
+
+                event.target.reset();
+            } catch (error) {
+                console.error('Erreur :', error);
+                alert('Échec lors de la modification du catway : ' + error.message);
+            }
+        }
+
+
+        // Supprimer un catway
+        async function deleteCatway(event) {
+            event.preventDefault();
+
+            const catwayId = event.target.catwayId.value;
+
+            try {
+                const response = await fetch(`/api/catways/${catwayId}`, {
+                    method: 'DELETE',
+                    headers
+                });
+
+                if (!response.ok) throw new Error('Erreur lors de la suppression du catway');
+
+                alert('Le catway a été supprimé avec succès');
+
+                event.target.reset();
+            } catch (error) {
+                console.error('Erreur :', error);
+                alert('Échec lors de la suppression du catway : ' + error.message);
+            }
+        }
+
+
+        // Afficher les détails d'un catway
+        async function showCatway(event) {
+            event.preventDefault();
+
+            const catwayId = event.target.catwayId.value;
+
+            try {
+                const response = await fetch(`/api/catways/${catwayId}`, {
+                    method: 'GET',
+                    headers
+                });
+
+                if (!response.ok) throw new Error('Erreur lors de l\'affichage des détails du catway');
+
+                const data = await response.json();
+
+                alert(`Détails du Catway :\nNuméro : ${data.catwayNumber}\nType : ${data.type}\nÉtat : ${data.catwayState}`);
+            } catch (error) {
+                console.error('Erreur :', error);
+                alert('Échec lors de l\'affichage des détails du catway : ' + error.message);
+            }
+        }
+
+
+        // Créer une réservation
+        async function createReservation(event) {
+            event.preventDefault();
+
+            const catwayId = event.target.catwayId.value;
+            const clientName = event.target.clientName.value;
+            const boatName = event.target.boatName.value;
+            const checkIn = event.target.checkIn.value;
+            const checkOut = event.target.checkOut.value;
+
+            try {
+                const response = await fetch(`/api/catways/${catwayId}/reservations`, {
+                    method: 'POST',
+                    headers,
+                    body: JSON.stringify({ clientName, boatName, checkIn, checkOut })
+                });
+
+                if (!response.ok) throw new Error('Erreur lors de la création de la réservation');
+
+                alert('La réservation a été créée avec succès');
+
+                event.target.reset();
+            } catch (error) {
+                console.error('Erreur :', error);
+                alert('Échec lors de la création de la réservation : ' + error.message);
+            }
+        }
+
+        // Supprimer une réservation
+        async function deleteReservation(event) {
+            event.preventDefault();
+
+            const catwayId = event.target.catwayId.value;
+            const reservationId = event.target.reservationId.value;
+
+            try {
+                const response = await fetch(`/api/catways/${catwayId}/reservations/${reservationId}`, {
+                    method: 'DELETE',
+                    headers
+                });
+
+                if (!response.ok) throw new Error('Erreur lors de la suppression de la réservation');
+
+                alert('La réservation a été supprimée avec succès');
+
+                event.target.reset();
+            } catch (error) {
+                console.error('Erreur :', error);
+                alert('Échec lors de la suppression de la réservation : ' + error.message);
+            }
+        }
+
+        // Afficher les détails d'une réservation
+        async function showReservation(event) {
+            event.preventDefault();
+
+            const catwayId = event.target.catwayId.value;
+            const reservationId = event.target.reservationId.value;
+
+            try {
+                const response = await fetch(`/api/catways/${catwayId}/reservations/${reservationId}`, {
+                    method: 'GET',
+                    headers
+                });
+
+                if (!response.ok) throw new Error('Erreur lors de l\'affichage des détails de la réservation');
+
+                const data = await response.json();
+
+                alert(`Détails de la Réservation :\nClient: ${data.clientName}\nBateau: ${data.boatName}\nDate de Début: ${data.checkIn}\nDate de Fin: ${data.checkOut}`);
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert('Échec lors de l\'affichage des détails de la réservation : ' + error.message);
+            }
+        }
+
+        document.getElementById('createUserForm').addEventListener('submit', createUser);
+        document.getElementById('deleteUserForm').addEventListener('submit', deleteUser);
+        document.getElementById('createCatwayForm').addEventListener('submit', createCatway);
+        document.getElementById('updateCatwayForm').addEventListener('submit', updateCatway);
+        document.getElementById('deleteCatwayForm').addEventListener('submit', deleteCatway);
+        document.getElementById('showCatwayForm').addEventListener('submit', showCatway);
+        document.getElementById('createReservationForm').addEventListener('submit', createReservation);
+        document.getElementById('deleteReservationForm').addEventListener('submit', deleteReservation);
+        document.getElementById('showReservationForm').addEventListener('submit', showReservation);
+    </script>
+    
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+[
+	{
+		"_id": "67166f216857c1233ad4a47b",
+		"catwayNumber": "670fdb3927d5bf326cb849e3",
+		"clientName": "John Doe",
+		"boatName": "L'Étoile des Mers",
+		"checkIn": "2024-10-20T00:00:00.000Z",
+		"checkOut": "2024-10-30T00:00:00.000Z",
+		"__v": 0
+	},
+	{
+		"_id": "67166f446857c1233ad4a47e",
+		"catwayNumber": "670fdb3927d5bf326cb849e3",
+		"clientName": "Jean Dupont",
+		"boatName": "Le Trident",
+		"checkIn": "2024-11-02T00:00:00.000Z",
+		"checkOut": "2024-11-14T00:00:00.000Z",
+		"__v": 0
+	},
+	{
+		"_id": "67166ff06857c1233ad4a487",
+		"catwayNumber": "6710fdc5cd7a0d1a5887cbb9",
+		"clientName": "Jeanne Dupont",
+		"boatName": "Le Vent du Nord",
+		"checkIn": "2024-10-16T00:00:00.000Z",
+		"checkOut": "2024-10-30T00:00:00.000Z",
+		"__v": 0
+	},
+	{
+		"_id": "671670046857c1233ad4a489",
+		"catwayNumber": "6710fdc5cd7a0d1a5887cbb9",
+		"clientName": "Jane Doe",
+		"boatName": "Aqua Spirit",
+		"checkIn": "2024-10-31T00:00:00.000Z",
+		"checkOut": "2024-11-10T00:00:00.000Z",
+		"__v": 0
+	},
+	{
+		"_id": "671670716857c1233ad4a48c",
+		"catwayNumber": "671105c7b3603c8d13d48ee6",
+		"clientName": "Marie Martin",
+		"boatName": "Le Corsaire",
+		"checkIn": "2024-10-21T00:00:00.000Z",
+		"checkOut": "2024-11-02T00:00:00.000Z",
+		"__v": 0
+	},
+	{
+		"_id": "671670f76857c1233ad4a48f",
+		"catwayNumber": "671105c7b3603c8d13d48ee6",
+		"clientName": "Pierre Dubois",
+		"boatName": "Serenity",
+		"checkIn": "2024-11-04T00:00:00.000Z",
+		"checkOut": "2024-11-15T00:00:00.000Z",
+		"__v": 0
+	},
+	{
+		"_id": "6716715e6857c1233ad4a492",
+		"catwayNumber": "6716697893540d4c747cf2ab",
+		"clientName": "François Morin",
+		"boatName": "L'Horizon",
+		"checkIn": "2024-10-22T00:00:00.000Z",
+		"checkOut": "2024-10-29T00:00:00.000Z",
+		"__v": 0
+	},
+	{
+		"_id": "671671ec6857c1233ad4a494",
+		"catwayNumber": "6716697893540d4c747cf2ab",
+		"clientName": "Philippe Masson",
+		"boatName": "Atlantis",
+		"checkIn": "2024-10-30T00:00:00.000Z",
+		"checkOut": "2024-11-05T00:00:00.000Z",
+		"__v": 0
+	},
+	{
+		"_id": "6716727a6857c1233ad4a497",
+		"catwayNumber": "6716697e93540d4c747cf2ad",
+		"clientName": "Anne Fournier",
+		"boatName": "L'Aurore",
+		"checkIn": "2024-10-19T00:00:00.000Z",
+		"checkOut": "2024-10-31T00:00:00.000Z",
+		"__v": 0
+	},
+	{
+		"_id": "671672ea6857c1233ad4a499",
+		"catwayNumber": "6716697e93540d4c747cf2ad",
+		"clientName": "Ciel d'Azur",
+		"boatName": "L'Aurore",
+		"checkIn": "2024-11-02T00:00:00.000Z",
+		"checkOut": "2024-11-17T00:00:00.000Z",
+		"__v": 0
+	}
+]

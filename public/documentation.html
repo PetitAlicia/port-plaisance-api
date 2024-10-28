@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation de l'API</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="body">
+        <header>
+            <h1>Documentation de l'API</h1>
+            <a href="/index.html">Retour à la Page d'Accueil</a>
+        </header>
+        
+        <main>
+            <h2>Vue d'ensemble</h2>
+    
+            <h3>Description de l'API</h3>
+    
+            <p>
+                Cette application de Gestion des Réservations de Catway permet de gérer les utilisateurs (créer ou supprimer un 
+                utilisateur), les catways (créer, modifier, supprimer ou afficher les détails d'un catway), et les réservations 
+                (créer, supprimer ou afficher les détails d'une réservation). Elle utilise le standard REST pour les routes et repose 
+                sur une base de données MongoDB pour stocker les informations.
+            </p>
+    
+            <h3>Fonctionnalités</h3>
+    
+            <p>
+                Gestion des utilisateurs - Authentifier, créer et supprimer des utilisateurs.
+            </p>
+            <p>
+                Gestion des catways - Créer, modifier et supprimer des catways, ainsi qu'afficher la liste des catways et les détails 
+                d'un catway précis.
+            </p>
+            <p>
+                Gestion des réservations - Créer et supprimer des réservations, ainsi qu'afficher la liste des réservations et les détails 
+            d'une réservation précise.
+            </p>
+    
+            <h2>Tutoriel</h2>
+    
+            <h3>Méthodes et routes</h3>
+    
+            <h4>Utilisateurs</h4>
+            <p>
+                POST /api/auth/signup - Authentifier un utilisateur<br>
+                POST /api/auth/login - Créer un utilisateur<br>
+                DELETE /api/auth/delete - Supprimer un utilisateur
+            </p>
+            
+    
+            <h4>Catways</h4>
+            <p>
+                POST /api/catways - Créer un catway<br>
+                PUT /api/catways/:id - Modifier un catway<br>
+                DELETE /api/catways/:id - Supprimer un catway<br>
+                GET /api/catways/:id - Afficher les détails d'un catway
+            </p>
+    
+            <h4>Réservations</h4>
+            <p>
+            POST /api/catways/:id/reservations - Créer une réservation<br>
+            DELETE /api/catways/:id/reservations/:id - Supprimer une réservation<br>
+            GET /api/catways/:id/reservations/:id - Afficher les détails d'une réservation
+            </p>
+            
+            <h3>Pages</h3>
+    
+            <p>
+                <a href="/index.html">index.html</a> - La page d'accueil, permettant de se connecter<br>
+                <a href="/dashboard.html">dashboard.html</a> - Le tableau de bord, donnant accès aux différentes fonctionnalités<br>
+                <a href="/catways.html">catways.html</a> - La liste des catways, ainsi que les détails de chaque catway<br>
+                <a href="/reservations.html">reservations.html</a> - La liste des réservations, ainsi que les détails de chaque réservation<br>
+                <a href="/documentation.html">documentation.html</a> - La documentation de l'API
+            </p>
+    
+            <h2>Exemples</h2>
+    
+            <h3>Exemples de réponse de l'API</h3>
+    
+            <h4>Afficher les détails d'un catway</h4>
+    
+            <h5>Requête :</h5>
+    
+            <p>
+                GET /api/catways/605c72d73e6e241b6c9e9e1e
+            </p>
+    
+            <h5>Réponse (JSON) :</h5>
+    
+            <p>
+                {<br>
+                    "_id": "605c72d73e6e241b6c9e9e1e",<br>
+                    "catwayNumber": 1,<br>
+                    "type": "long",<br>
+                    "catwayState": "disponible"<br>
+                }
+            </p>
+    
+            <h4>Créer une réservation</h4>
+    
+            <h5>Requête :</h5>
+    
+            <p>
+                POST /api/catways/:id/reservations
+            </p>
+    
+            <h5>Corps de la requête (JSON) :</h5>
+    
+            {<br>
+            "catwayNumber": "1",<br>
+            "clientName": "John Doe",<br>
+            "boatName": "Le Neptune",<br>
+            "checkIn": "2024-10-20T14:00:00Z",<br>
+            "checkOut": "2024-10-25T10:00:00Z"<br>
+            }
+    
+            <h5>Réponse (JSON) :</h5>
+    
+            {<br>
+            "_id": "605c72d73e6e241b6c9e9e20",<br>
+            "catwayNumber": "605c72d73e6e241b6c9e9e1e",<br>
+            "clientName": "John Doe",<br>
+            "boatName": "Le Neptune",<br>
+            "checkIn": "2024-10-20T14:00:00Z",<br>
+            "checkOut": "2024-10-25T10:00:00Z"<br>
+            }
+    
+            <h2>Glossaire</h2>
+
+            <p>
+                API - Interface de programmation d'applications permettant la communication entre différentes applications.
+            </p>
+            <p>
+                Catway - Petit appontement pour amarrer un bateau.
+            </p>
+            <p>
+                MongoDB - Base de données utilisée pour stocker les données de l'application.
+            </p>
+            <p>
+                Réservation - Engagement pour l'utilisation d'un catway à une certaine période.
+            </p>
+            <p>
+                REST - Architecture pour la création de services web.
+            </p>
+        </main>
+    
+        <footer>
+            <p>&copy; 2024 Port de Plaisance Russell</p>
+        </footer>
+    </div>
+</body>
+
+</html>

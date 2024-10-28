@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Réservations</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="body">
+        <header>
+            <h1>Liste des Réservations</h1>
+            <nav>
+                <a href="/dashboard.html">Retour au Tableau de Bord</a>
+                | 
+                <a href="/catways.html">Liste des Catways</a>
+            </nav>
+        </header>
+        
+        <main>
+            <h2>Réservations :</h2>
+            <div id="reservationList"></div>
+        </main>
+    
+        <footer>
+            <p>&copy; 2024 Port de Plaisance Russell</p>
+        </footer>
+    </div>
+
+    <script>
+        const token = localStorage.getItem('token');
+        console.log('Token :', token);
+
+        if (!token) {
+            alert('Token non trouvé, veuillez vous connecter.');
+            window.location.href = '/index.html';
+        } else {
+            fetchReservations();
+        }
+
+        // Afficher la liste de toutes les réservations
+        function fetchReservations() {
+            fetch('/api/reservations/all', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erreur réseau');
+                }
+                return response.json();
+            })
+
+            .then(reservations => {
+                const reservationList = document.getElementById('reservationList');
+                reservations.forEach(reservation => {
+                    const reservationElement = document.createElement('div');
+                    reservationElement.innerText = `- ID du Catway : ${reservation.catwayNumber}\n- Client : ${reservation.clientName}\n- Bateau : ${reservation.boatName}\n- Date de Début : ${reservation.checkIn}\n- Date de Fin : ${reservation.checkOut}\n\n`;
+                    reservationList.appendChild(reservationElement);
+                });
+            })
+
+            .catch(error => {
+                console.error('Erreur lors de l\'affichage des réservations :', error);
+            });
+        }
+    </script>
+
+</body>
+
+</html>

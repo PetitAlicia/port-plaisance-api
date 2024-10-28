@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Catways</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="body">
+        <header>
+            <h1>Liste des Catways</h1>
+            <nav>
+                <a href="/dashboard.html">Retour au Tableau de Bord</a>
+                | 
+                <a href="/reservations.html">Liste des Réservations</a>
+            </nav>
+        </header>
+        
+        <main>
+            <h2>Catways :</h2>
+            <div id="catwayList"></div>
+        </main>
+    
+        <footer>
+            <p>&copy; 2024 Port de Plaisance Russell</p>
+        </footer>
+    </div>
+
+    <script>
+        const token = localStorage.getItem('token');
+        console.log('Token :', token);
+
+        if (!token) {
+            alert('Token non trouvé, veuillez vous connecter.');
+            window.location.href = '/index.html';
+        } else {
+            fetchCatways();
+        }
+
+        // Afficher la liste de tous les catways
+        function fetchCatways() {
+            fetch('/api/catways', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erreur réseau');
+                }
+                return response.json();
+            })
+
+            .then(catways => {
+                const catwayList = document.getElementById('catwayList');
+                catways.forEach(catway => {
+                    const catwayElement = document.createElement('div');
+                    catwayElement.innerText = `- Catway Numéro ${catway.catwayNumber}\n- Type : ${catway.type}\n- État : ${catway.catwayState}\n\n`;
+                    catwayList.appendChild(catwayElement);
+                });
+            })
+
+            .catch(error => {
+                console.error('Erreur lors de l\'affichage des catways :', error);
+            });
+        }
+    </script>
+
+</body>
+
+</html>
